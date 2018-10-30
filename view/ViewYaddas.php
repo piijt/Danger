@@ -12,7 +12,7 @@ class YaddaView extends View {
         $s = "<div class='create-yadda'><h1>Create a Yadda</h1>";
         foreach ($yaddas as $yadda) {
             $s .=  sprintf("%s %s: %s<br/>\n"
-                , $yadda->getUid(), strftime("%Y-%m-%d %H:%M:%S", $yadda->getTstamp()), $yadda->getContent());
+                , $yadda->getUid(), $yadda->getTstamp(), $yadda->getContent());
         }
         return $s;
     }
