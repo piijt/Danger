@@ -21,7 +21,7 @@ abstract class View {
 <html>
   <head>
     <meta charset='utf-8'/>
-    <title>MVC Example (nml)</title>
+    <title>Yadda&#179; &trade;</title>
 
     <link rel='stylesheet' href='./css/style.css'/>
 
@@ -47,8 +47,10 @@ abstract class View {
                 $_SERVER['PHP_SELF']);
         if (Authentication::isAuthenticated()) {
             $s .= sprintf("
-                <li><a href='%s?function=Ya'>Yaddas</a></li>\n",
-              $_SERVER['PHP_SELF'], $_SERVER['PHP_SELF'] 
+                <li><a href='%s?function=Ya'>Yaddas</a></li>\n
+                <li><a href='%s?function=P'>Profile</a></li>\n",
+              $_SERVER['PHP_SELF']
+            , $_SERVER['PHP_SELF']
             );
         } else {
             $s .= sprintf("                <li><a href='%s?function=U'>Register User</a></li>\n",
@@ -64,7 +66,7 @@ abstract class View {
         $s .= sprintf("             </ul>\n        </header>\n");
 
         if (Authentication::isAuthenticated()) {
-            $s .= sprintf("%8s<div id='user-welcome'>Welcome %s</div>\n", " ", Authentication::getLoginId());
+            $s .= sprintf("%8s<div id='user-welcome'>Welcome to Yadda %s</div>\n", " ", Authentication::getLoginId());
         }
         return $s;
     }

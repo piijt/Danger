@@ -11,7 +11,7 @@ require_once './model/DbH.php';
 require_once './model/ModelIf.php';
 require_once './model/ModelA.php';
 
-class Yadda extends Model {
+class Profile extends Model {
     private $uid;
     private $tstamp;
     private $content;
@@ -55,80 +55,27 @@ class Yadda extends Model {
     public function delete() {}
 
 
-    public static function retrieve1($content) {
-        $yaddas = array();
-        $dbh = Model::connect();
 
-        $sql = "select *";
-        $sql .= " from yadda";
-        $sql .= " where content = :content";
-        try {
-            $q = $dbh->prepare($sql);
-            $q->bindValue(':content', $content);
-            $q->bindValue(':uid', $uid);
-            $q->execute();
-            while ($row = $q->fetch()) {
-                $yadda = self::createObject($row);
-                array_push($yaddas, $yadda);
-            }
-        } catch(PDOException $e) {
-            printf("<p>Query failed: <br/>%s</p>\n",
-                $e->getMessage());
-        } finally {
-            return $yadda;
-        }
-    }
-
-
-    public static function retrieveCo() {
+    public static function retrieveP() {
     $yaddas = array();
     $dbh = Model::connect();
 
     $sql = "select *";
-    $sql .= " from yadda";
+    $sql .= " from user";
     try {
         $q = $dbh->prepare($sql);
         $q->execute();
         while ($row = $q->fetch()) {
-            $yadda = self::createObject($row);
-            array_push($yaddas, $yadda);
+            $profile = self::createObject($row);
+            array_push($profiles, $profile);
         }
     } catch(PDOException $e) {
         printf("<p>Query failed: <br/>%s</p>\n",
             $e->getMessage());
     } finally {
-        return $yaddas;
+        return $profiles;
     }
 }
-
-        public static function retrievem() {
-        $yaddas = array();
-        $dbh = Model::connect();
-
-        $sql = "select *";
-        $sql .= " from yadda";
-        $sql .= " order by tstamp desc";
-        try {
-            $q = $dbh->prepare($sql);
-            $q->execute();
-            while ($row = $q->fetch()) {
-                  $yadda= self::createObject($row);
-                array_push($yaddas, $yadda);
-            }
-        } catch(PDOException $e) {
-            printf("<p>Query failed: <br/>%s</p>\n",
-                $e->getMessage());
-        } finally {
-            return $yaddas;
-        }
-    }
-
-
-        public static function createObject($a) {
-          $yadda = new Yadda($a['uid'], $a['tstamp'], $a['content']);{
-            return $yadda;
-          }
-        }
 
 
 }

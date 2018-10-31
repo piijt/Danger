@@ -9,19 +9,13 @@
 require_once 'ModelA.php';
 
 class User extends Model {
-    private $uid;
-    private $first;
-    private $last;
-    private $email;     // string
+    private $uid;       // string
     private $password;  // string ll=128
     private $activated;
     private $pwd;
 
-    public function __construct($uid, $first, $last, $email, $activated) {
+    public function __construct($uid, $activated) {
         $this->uid = $uid;
-        $this->first = $first;
-        $this->last = $last;
-        $this->email = $email;
         $this->activated = $activated;
     }
 
@@ -36,29 +30,14 @@ class User extends Model {
         return $this->uid;
     }
 
-    public function getFirst() {
-      return $this->first;
-    }
-
-    public function getLast() {
-      return $this->last;
-    }
-
-    public function getEmail() {
-      return $this->email;
-    }
-
     public function create() {
-        $sql = "insert into user (uid, first, last, email, password)
-                        values (:uid, :first, :last, :email, :pwd)";
+        $sql = "insert into user (uid, password)
+                        values (:uid, :pwd)";
 
         $dbh = Model::connect();
         try {
             $q = $dbh->prepare($sql);
             $q->bindValue(':uid', $this->getUid());
-            $q->bindValue(':first', $this->getFirst());
-            $q->bindValue(':last', $this->getLast());
-            $q->bindValue(':email', $this->getEmail());
             $q->bindValue(':pwd', password_hash($this->getPwd(), PASSWORD_DEFAULT));
             $q->execute();
         } catch(PDOException $e) {
@@ -67,6 +46,7 @@ class User extends Model {
         }
         $dbh->query('commit');
     }
+
 
     public function changePwd() {
       $dbh = Model::connect();
@@ -82,6 +62,8 @@ class User extends Model {
             $e->getMessage());
       }
     }
+
+
 
     public function update() { /*nop*/ }
     public function delete() { /*nop*/ }
@@ -131,6 +113,10 @@ class User extends Model {
     }
 
 
+
+
+
+
     public function __toString() {
         return sprintf("%s%s", $this->uid, $this->activated ? '' : ', not activated');
     }
@@ -158,7 +144,7 @@ class User extends Model {
 
         public static function createObject($a) {
           $act = isset($a['activated']) ? $a['activated'] : null;
-               $user = new User($a['uid'], $a['first'], $a['last'], $a['email'], $act);
+               $user = new User($a['uid'], $act);
                if (isset($a['pwd1'])) {
                    $user->setPwd($a['pwd1']);
                }

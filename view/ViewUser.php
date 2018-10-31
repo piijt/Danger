@@ -31,20 +31,8 @@ class UserView extends View {
             <div class='gets'>\n
                 <h3>Create User</h3>\n
                 <p>\n
-                    Username:<br/>
+                    Userid:<br/>
                     <input type='text' name='uid'/>\n
-                </p>\n
-                <p>\n
-                    First name:<br/>
-                    <input type='text' name='first'/>\n
-                </p>\n
-                <p>\n
-                    Last name:<br/>
-                    <input type='text' name='last'/>\n
-                </p>\n
-                <p>\n
-                    Email:<br/>
-                    <input type='text' name='email'/>\n
                 </p>\n
                 <p>\n
                     Pwd:<br/>
@@ -54,10 +42,6 @@ class UserView extends View {
                     Pwd repeat:<br/>
                     <input type='password' name='pwd2'/>\n
                 </p>\n
-                <p>\n
-                   Profile image:<br/>
-                   <input type='file' name='imageitself'/>\n
-               </p>\n
                 <p>\n
                     <input type='submit' value='Go'/>
                 </p>
