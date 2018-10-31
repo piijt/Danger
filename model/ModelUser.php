@@ -30,6 +30,10 @@ class User extends Model {
         return $this->uid;
     }
 
+    public function getFirst() {
+        return $this->first;
+    }
+
     public function create() {
         $sql = "insert into user (uid, password)
                         values (:uid, :pwd)";

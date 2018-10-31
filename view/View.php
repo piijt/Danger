@@ -41,7 +41,7 @@ abstract class View {
 
     private function topmenu() {
         $s = sprintf("        <header>
-            <h1>Yadda&#179; &trade;</h1>\n
+            <h1>Yadda<sup>3 &trade;</sup></h1>\n
             <ul id='menu'>\n
                 <li><a href='%s'>Home</a></li>\n",
                 $_SERVER['PHP_SELF']);

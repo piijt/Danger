@@ -1,8 +1,8 @@
 <?php
     session_start();
     require_once './model/ModelUser.php';
-    require_once 'model/ModelYaddas.php';
-    require_once 'model/ModelProfile.php';
+    require_once './model/ModelYaddas.php';
+    require_once './model/ModelProfile.php';
     require_once './view/ViewLogin.php';
     require_once './view/ViewUser.php';
     require_once './view/ViewYaddas.php';
