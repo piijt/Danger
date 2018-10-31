@@ -1,8 +1,7 @@
 <?php
-    require_once './includes/DbP.inc.php';
-    require_once './includes/DbH.inc.php';
-    require_once './includes/Sellable.inc.php';
-    require_once './includes/Golfball.inc.php';
+    require_once './inc/DbH.php';
+    require_once './inc/Sellable.inc.php';
+    require_once './inc/Golfball.inc.php';
     $dbh = DbH::getDbH();
     $title = 'Display Golfballs for Sale';
 

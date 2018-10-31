@@ -10,8 +10,6 @@
         <title><?php echo $title;?></title>
         <link rel="stylesheet" href="./css/ifdemo.css"/>
         <script>
-            // Keybord saver #ACK:
-
             var $ = function (nml) {
                 return document.getElementById(nml);
             }
@@ -46,13 +44,13 @@
     </head>
     <body>
         <?php
-            printf("<header><h1>%s</h1></header>\n", $title);            // put your code here
+            printf("<header><h1>%s</h1></header>\n", $title);
         ?>
         <form action="golfballsdb.php"
               method="post"
               id='deform'
 
-              enctype="multipart/form-data">  <!-- File can be sendt in multible parts -->
+              enctype="multipart/form-data">
             <fieldset>
                 <legend>Golfballs</legend>
             <p>

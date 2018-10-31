@@ -1,6 +1,5 @@
 <?php
-    require_once './includes/DbP.inc.php';
-    require_once './includes/DbH.inc.php';
+    require_once './inc/DbH.php';
     $dbh = DbH::getDbH();
 
     foreach($_GET as $key => $value) {
@@ -15,6 +14,7 @@
             $q = $dbh->prepare($sql);
             $q->bindValue(':color', $color);
             $q->bindValue(':dimples', $dimples);
+            $q->bindValue(':imageitself', $imageitself);
             $q->execute();
             $out = $q->fetch();
         } catch(PDOException $e)  {

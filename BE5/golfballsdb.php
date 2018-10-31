@@ -7,8 +7,7 @@
         header("Location: ./myformim.php?x=1");
     }
 
-    require_once './inc/DbP.inc.php';
-    require_once './inc/DbH.inc.php';
+    require_once './inc/DbH.php';
     require_once './inc/Sellable.inc.php';
     require_once './inc/Golfball.inc.php';
     $dbh = DbH::getDbH();
