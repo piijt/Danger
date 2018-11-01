@@ -1,5 +1,11 @@
 <?php
-
+/**
+ * model/ModelYadda.inc.php
+ * @package MVC_NML_Sample
+ * @author nml
+ * @copyright (c) 2017, nml
+ * @license http://www.fsf.org/licensing/ GPLv3
+ */
 require_once './model/DbP.php';
 require_once './model/DbH.php';
 require_once './model/ModelIf.php';
@@ -9,6 +15,7 @@ class Yadda extends Model {
     private $uid;
     private $tstamp;
     private $content;
+
 
     public function __construct(  $uid
                                 , $tstamp
@@ -115,9 +122,13 @@ class Yadda extends Model {
             return $yaddas;
         }
     }
+
+
         public static function createObject($a) {
           $yadda = new Yadda($a['uid'], $a['tstamp'], $a['content']);{
             return $yadda;
           }
         }
+
+
 }

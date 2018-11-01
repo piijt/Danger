@@ -6,7 +6,8 @@
  * @copyright (c) 2017, nml
  * @license http://www.fsf.org/licensing/ GPLv3
  */
-require_once 'model/DbP.php';
+set_include_path('.:./model');
+require_once 'DbP.php';
 
 class DbH extends DbP {
     private static $instance = FALSE;

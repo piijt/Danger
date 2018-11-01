@@ -1,6 +1,8 @@
 <?php
 require_once './view/View.php';
+
 class YaddaView extends View {
+
     public function __construct($model) {
         parent::__construct($model);
     }
@@ -20,6 +22,7 @@ class YaddaView extends View {
             <p>
             %s
             </p>
+
             <div>
             <input type='submit' value='Reply' id='yadda-reply'/>
             </div></div>
@@ -43,13 +46,16 @@ class YaddaView extends View {
                       );
         return $s;
     }
+
     private function displayYadda() {
         $s = sprintf("<main class='main'>\n%s\n%s</main>\n"
                     , $this->yaddaForm()
                     , $this->displayManyYaddas());
         return $s;
     }
+
     public function display(){
        $this->output($this->displayYadda());
     }
+
   }

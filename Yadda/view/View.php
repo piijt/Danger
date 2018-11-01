@@ -21,7 +21,7 @@ abstract class View {
 <html>
   <head>
     <meta charset='utf-8'/>
-    <title>Yadda</title>
+    <title>Yadda&#179; &trade;</title>
 
     <link rel='stylesheet' href='./css/style.css'/>
 
@@ -41,32 +41,43 @@ abstract class View {
 
     private function topmenu() {
         $s = sprintf("        <header>
-            <h1>Yadda&#179; &trade;</h1>\n
+            <h1>Yadda<sup>3 &trade;</sup></h1>\n
             <ul id='menu'>\n
                 <li><a href='%s'>Home</a></li>\n",
                 $_SERVER['PHP_SELF']);
         if (Authentication::isAuthenticated()) {
+          $tt = '';
+          if (Authentication::getProfile() === 'admin') {
+            $tt = "<li><a href='%s?function=Ub'>Edit Users</a></li>";
+          }
             $s .= sprintf("
-                <li><a href='%s?function=Ya'>Yaddas</a></li>\n",
-              $_SERVER['PHP_SELF'], $_SERVER['PHP_SELF'], $_SERVER['PHP_SELF']
+                <li><a href='%s?function=Ya'>Yaddas</a></li>\n
+                <li><a href='%s?function=Ub'>Edit Users</a></li>\n
+                  %s",
+              $_SERVER['PHP_SELF'],
+              $_SERVER['PHP_SELF']
+            ,$tt
             );
+
         } else {
             $s .= sprintf("
-                          <li><a href='%s?function=U'>Register User</a></li>\n",
+			<li><a href='%s?function=U'>Register User</a></li>\n",
                 $_SERVER['PHP_SELF']);
         }
         if (!Authentication::isAuthenticated()) {
-            $s .= sprintf("                <li><a href='%s?function=A'>Login</a></li>\n"
+            $s .= sprintf("
+			<li><a href='%s?function=A'>Login</a></li>\n"
                     , $_SERVER['PHP_SELF']);
         } else {
-            $s .= sprintf("                <li><a href='%s?function=Z'>Logout</a></li>\n"
+            $s .= sprintf("
+			<li><a href='%s?function=Z'>Logout</a></li>\n"
                     , $_SERVER['PHP_SELF']);
         }
         $s .= sprintf("             </ul>\n        </header>\n");
 
         if (Authentication::isAuthenticated()) {
-            $s .= sprintf("%8s<div id='user-welcome'>Welcome %s</div>\n", " ", Authentication::getLoginId());
-        }
+            $s .= sprintf("%8s<div id='user-welcome'><h1>Welcome to Yadda, $%s</h1><img src='model/UserImage.php?uid=%s' width='auto' height='240'</div>\n", " ", Authentication::getLoginId(), Authentication::getLoginId());
+         }
         return $s;
     }
 
@@ -76,4 +87,9 @@ abstract class View {
         printf("%s", $s);
         print($this->bottom());
     }
+
+	public	function output1( $s ) {
+		printf( "%s", $s );
+
+	}
 }

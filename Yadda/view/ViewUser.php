@@ -16,7 +16,7 @@ class UserView extends View {
 
     private function displayul() {
         $users = User::retrievem();
-        $s = "<h1 style='display:none;'>Users</h1><div class='haves'>";
+        $s = "<div class='haves' style='display:none;'> ";
         foreach ($users as $user) {
             $s .=  sprintf("%s<br/>\n"
                 , $user);
@@ -25,9 +25,9 @@ class UserView extends View {
         return $s;
     }
 
-    private function userForm() {
+ private function userForm() {
         $s = sprintf("
-            <form action='%s?function=U' method='post' id='register' enctype='multipart/form-data'>\n
+            <form action='%s?function=U' method='post' id='register' enctype='Multipart/form-data'>\n
             <div class='gets'>\n
                 <h3>Create User</h3>\n
                 <p>\n
@@ -44,7 +44,7 @@ class UserView extends View {
                 </p>\n
                 <p>\n
                     Email:<br/>
-                    <input type='text' name='email'/>\n
+                    <input type='email' name='email'/>\n
                 </p>\n
                 <p>\n
                     Pwd:<br/>
@@ -57,7 +57,7 @@ class UserView extends View {
                 <p>\n
                    Profile image:<br/>
                    <input type='hidden' name='MAX_FILE_SIZE' value='131072'/>
-                   <input type='file' name='imageitself'/>\n
+                   <input type='file' name='imageitself' required/>\n 
                </p>\n
                 <p>\n
                     <input type='submit' value='Go'/>

@@ -12,11 +12,11 @@ require_once './model/AuthA.php';
 class Authentication extends AuthA {
 
     protected function __construct($user, $pwd) {
-        parent::__construct($user);
+        parent::__construct($user, $profile);
         try {
             self::dbLookUp($user, $pwd);                        // invoke auth
-            $_SESSION[self::$sessvar] = $this->getUserId();     // succes
-
+            $_SESSION[self::$sessvar] = $this->getUserId();
+            $_SESSION[self::$sessprof] = $this->getProfile();     // succes
         }
         catch (Exception $e) {
             self::$logInstance = FALSE;

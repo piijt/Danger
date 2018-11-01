@@ -17,24 +17,27 @@ class LoginView extends View {
 
     private function loginForm() {
         $s = sprintf("\n
+        <section>
+
+
+            <div class='login'>
             <form action='%s' method='post' id='login-form'>\n
             <table id='login'>\n
-                <caption>Login</caption>\n
+            <div>
+                <caption style='font-size:1.3rem; font-weight:bold; padding-bottom: 10px;'>Login</caption>\n
                 <tr>\n
                     <td>Userid:</td><td><input type='text' name='uid'/></td>\n
                 </tr>\n
                 <tr>\n
                     <td>Pwd: </td><td><input type='password' name='pwd'/></td>\n
                 </tr>\n
-                <tr>\n
-                    <td></td>\n
-                    <td>
+                </div>
+
+                    <div id='login-submit'>
                         <p>
-                        <input type='submit' value='OK'/>&nbsp;&nbsp;&nbsp;
-                        <button onclick='window.location=./index.php?f=A'>I Surrender</button>
-                        </p>
-                    </td>\n
-                </tr>\n", $_SERVER['PHP_SELF']);
+                        <input type='submit' value='OK' id='login-btn'/>&nbsp;&nbsp;&nbsp;
+                        <button onclick='window.location=./index.php?f=Y' id='login-surrender'>I Surrender</button>
+                        </p>\n", $_SERVER['PHP_SELF']);
 
         if (!Model::areCookiesEnabled()) {
             $s .= "<tr><td colspan='2' class='err'>Cookies
@@ -42,7 +45,7 @@ class LoginView extends View {
                       enabled before attempting login.</td></tr>";
         }
         $s .= "          </table>\n";
-        $s .= "          </form>\n";
+        $s .= "          </form>\n</div></section>\n";
         return $s;
     }
 

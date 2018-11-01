@@ -1,5 +1,11 @@
 <?php
-
+/**
+ * controller/Controller.inc.php
+ * @package MVC_NML_Sample
+ * @author nml
+ * @copyright (c) 2017, nml
+ * @license http://www.fsf.org/licensing/ GPLv3
+ */
 require_once 'model/ModelA.php';
 
 class Controller {
@@ -17,7 +23,7 @@ class Controller {
     public function doSomething() {
         switch ($this->function) {
             case 'A':   //auth
-                $this->model = new User(null, null, null, null, null);
+                $this->model = new User(null, null, null, null, null, null, null);
                 $view1 = new LoginView($this->model);
                 if (isset($_POST)) {
                     $this->auth($_POST);
@@ -25,40 +31,49 @@ class Controller {
                 $view1->display();
                 break;
             case 'Z':   //logout
-                $this->model = new User(null, null, null, null, null);
+                $this->model = new User(null, null, null, null, null, null, null);
                 $view1 = new LoginView($this->model);
                 $this->logout();
                 $view1->display();
                 break;
             case 'U':   //user create
-                $this->model = new User(null, null, null, null, null); // init a model
+                $this->model = new User(null, null, null, null, null, null, null, null); // init a model
                 $view1 = new UserView($this->model);                  // init a view
                 if (isset($_POST)) {
-                    $this->createUser($_POST);               // activate controller
+                    $this->createUser($_POST, $_FILES);               // activate controller // $_FILES kalder file i formularen
                 }
                 $view1->display();
                 break;
             case 'Ub':   //user activation create
-                $this->model = new User(null, null);                    // init a model
+                $this->model = new User(null, null, null, null, null, null, null, null); // init a model
                 $view1 = new UserViewA($this->model);                  // init a view
                 if (isset($_POST)) {
-                    $this->activateUser($_POST);                    // activate controller
+                    $this->activateUser($_POST);               // activate controller
+
                 }
                 $view1->display();
                 break;
-        case 'Ud':   //user deactivation create
-              $this->model = new User(null, null);                    // init a model
-              $view1 = new UserViewB($this->model);                  // init a view
+			case 'Uc':   //user deactivation create
+                $this->model = new User(null, null, null, null, null); // init a model
+                $view1 = new UserViewA($this->model);                  // init a view // added c
               if (isset($_POST)) {
-                  $this->deactivateUser($_POST);                    // activate controller
-              }
+                   $this->deactivateUser($_POST);               // activate controller
+               }
               $view1->display();
-              break;
+               break;
+			case 'Ud':   //user deactivation create
+                $this->model = new User(null, null, null, null, null); // init a model
+                $view1 = new UserViewA($this->model);                  // init a view // added c
+              if (isset($_POST)) {
+                   $this->deleteUser($_POST);               // activate controller
+               }
+              $view1->display();
+               break;
             case 'Ya':  //yadda create
                 $this->model = new Yadda(Authentication::getLoginId(), null, null);   // init a model
-                $view1 = new YaddaView($this->model);                                   // init view
+                $view1 = new YaddaView($this->model);                 // init view
                 if (isset($_POST)) {
-                    $this->createYadda($_POST);                  // activate controller
+                  $this->createYadda($_POST);                  // activate controller
                 }
                 $view1->display();
                 break;
@@ -78,9 +93,9 @@ class Controller {
     }
 
 
-    public function createUser($p) {
+    public function createUser($p, $f) {
         if (isset($p) && count($p) > 0) {
-            $user = User::createObject($p);  // object from array
+            $user = User::createObject($p, $f);  // object from array
             $user->create();         // model method to insert into db
             $p = array();
         }
@@ -94,6 +109,21 @@ class Controller {
         }
     }
 
+	public function deactivateUser($p) {
+     if (isset($p) && count($p) > 0) {
+       $user = User::createObject($p);  // object from array
+       $user->deactivate();         // model method to update in db
+       $p = array();
+	 }
+   }
+
+	  public function deleteUser($p) {
+         if (isset($p) && count($p) > 0) {
+		 $user = User::createObject($p);  // object from array
+         $user->delete();         // model method to update in db
+         $p = array();
+	 }
+   }
 
     public function createYadda($p) {
         if (isset($p) && count($p) > 0) {
